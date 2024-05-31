@@ -1,28 +1,29 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const bookSchema = new Schema({
-  name: {
+const reviewsSchema = new Schema({
+  username: {
     type: String,
     required: true,
   },
-  author: {
+  bookName: {
     type: String,
     required: true,
   },
-  releaseDate: {
-    type: Date,
-    required: true,
-  },
-  numOfPages: {
+  reviewNumber: {
     type: Number,
     required: true,
   },
-  reviews: [
+  date: {
+    type: Date,
+    // required: true,
+  },
+  reviewSentence: [
     {
       type: String,
+      required: true,
     },
   ],
 });
 
-module.exports = mongoose.model("book", bookSchema);
+module.exports = mongoose.model("reviews", reviewsSchema);
