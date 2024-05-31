@@ -21,5 +21,3 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-// LISTEN ON PORT 4000
-// frontend is running on port 3000

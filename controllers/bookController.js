@@ -1,5 +1,3 @@
-// handler functions that will be executed
-
 const Book = require("../models/bookModel");
 
 const getBooks = async (req, res) => {
