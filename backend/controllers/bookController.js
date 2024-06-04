@@ -21,11 +21,15 @@ const getBook = async (req, res) => {
 
 const createBook = async (req, res) => {
   // get the text from the req.body
-  const { text } = req.body;
+  const { title, author, releaseDate, numberOfPages, reviews } = req.body;
 
   // create new todo object with model
   const bookObj = new Book({
-    text,
+    title: title,
+    author: author,
+    releaseDate: releaseDate,
+    numberOfPages: numberOfPages,
+    reviews: reviews,
   });
   // await for it to be saved
   const newBook = await bookObj.save();
@@ -48,12 +52,17 @@ const deleteBook = async (req, res) => {
   const { id } = req.params;
 
   const book = await Book.findByIdAndDelete(id);
+  res.status(200);
+  res.json({
+    message: `${book.title} deleted successfully`,
+    id: book.id,
+  });
 };
 
 module.exports = {
-  createBook,
   getBooks,
+  getBook,
+  createBook,
   editBook,
   deleteBook,
-  getBook,
 };
