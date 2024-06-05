@@ -113,7 +113,7 @@ export default function App() {
       <div className="readingList">
       <h1>My Reading List</h1>
         <h2>____________________________________</h2>
-        <h2>____________________________________</h2>
+       
         <button onClick={handleManualEntryForm}>Add a book to the list manually</button>
         {manualEntryForm&&<form >
           <input type="text" placeholder="title" required name="title" onChange={handleManualEntry}/>
@@ -122,6 +122,7 @@ export default function App() {
           <input type="text" placeholder="number of pages" name="pages" onChange={handleManualEntry}/>
           {manualBook.title&&manualBook.author&&<input type="submit" onClick={addManualBook} />}
           </form>}
+          <h2>____________________________________</h2>
         {book.map((b)=><ReadingList key={b.id} title={b.title} author={b.author} year ={b.year} pages={b.pages} id={b.id} getReview={getReview} handleRemove={handleRemove}/>)}
         
       </div>       
