@@ -6,21 +6,18 @@ import Book from "./components/Book";
 import ReadingList from "./components/ReadingList";
 import { addBookToList } from "./api/addBookToList";
 import { updateBook } from "./api/updateBook";
+import { getBooks } from "./api/getBooks";
 
 
 export default function App() {
   
   const [bookInput, getBook]=useState("");
   const [userBook, fetchBook]=useState("");
-
   const [titleInput, getTitle]=useState("");
   const [userTitle, fetchTitle]=useState("");
-
   const [book, addBook]= useState([]);
   const [review, setReview] = useState("ABS");
   const [myReview, setMyReview] = useState("myReview");
-
-
   const [manualEntryForm, setManualEntryForm] = useState(false);
   const [manualBook, setManualBook] = useState({
     title:"",
@@ -29,6 +26,16 @@ export default function App() {
     pages:"",
     id:"",    
   })
+
+//   useEffect(() => {
+//     const fetchBooks = async () => {
+//         let data = await getBooks()
+//         // setTodos(data.todos)
+//         console.log(data.books);
+//         addBook(data.books)
+//     }
+//     fetchBooks()
+// }, [])
  
 
     function handleSubmit(event){

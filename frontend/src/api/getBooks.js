@@ -12,8 +12,8 @@ const API_URL = `http://localhost:4000`
 //      return data
 // }
 
-export const readTodos = async () => {
-     const response = await fetch(`${API_URL}/todos/items`, {
+export const getBooks = async () => {
+     const response = await fetch(`${API_URL}/books/items`, {
          // method type?
          method: 'GET',
          // content type?
