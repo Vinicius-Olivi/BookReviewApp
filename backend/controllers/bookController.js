@@ -2,11 +2,11 @@ const Book = require("../models/bookModel");
 
 const getBooks = async (req, res) => {
   // find all items from a mongoose Model method
-  const items = await Book.find({});
+  const books = await Book.find({});
   // respond with an object that has a message and the items from the DB
   res.json({
-    message: "all items",
-    books: items,
+    message: "all books",
+    books: books,
   });
 };
 
@@ -42,9 +42,28 @@ const editBook = async (req, res) => {
   // get id from ':id' param from the route
   const { id } = req.params;
   //get updated todo data from the request body
-  const book = await Book.findByIdAndUpdate(is, { text: req.body.text });
-  res.status(200).json(book);
-  // use mongoose model method findByIdAndUpdate
+  const { title, author, releaseDate, numberOfPages, reviews } = req.body;
+
+  try {
+    const updatedBook = await Book.findByIdAndUpdate(
+      id,
+      {
+        title: title,
+        author: author,
+        releaseDate: releaseDate,
+        numberOfPages: numberOfPages,
+        reviews: reviews,
+      },
+      {
+        new: true,
+      },
+    );
+    if (!updatedBook)
+      return res.status(404).json({ message: "Book not found" });
+    res.status(200).json(updatedBook);
+  } catch (error) {
+    console.error("Error updating book", error);
+  }
 };
 
 const deleteBook = async (req, res) => {

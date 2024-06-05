@@ -18,9 +18,11 @@ const bookSchema = new Schema({
     type: Number,
     required: true,
   },
+
   reviews: [
     {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Review",
     },
   ],
 });
