@@ -7,6 +7,7 @@ import ReadingList from "./components/ReadingList";
 import { addBookToList } from "./api/addBookToList";
 import { updateBook } from "./api/updateBook";
 import { getBooks } from "./api/getBooks";
+import { deleteBook } from "./api/deleteBook";
 
 
 export default function App() {
@@ -37,15 +38,13 @@ export default function App() {
 }, [])
  
 
-    function handleSubmit(event){
-      
+    function handleSubmit(event){      
       event.preventDefault();
       fetchBook(bookInput);
       getBook("");
     }
 
-    function handleTitleSubmit(event){
-      
+    function handleTitleSubmit(event){      
       event.preventDefault();
       fetchTitle(titleInput);
       getTitle("");
@@ -95,7 +94,15 @@ export default function App() {
       function checkId(b){
           return b.id!==id;
       }
-      addBook(bookNew)
+      addBook(bookNew);
+      const removeBook = async () => {        
+        let obj = {
+            id: id,
+            }
+        let result = await deleteBook(obj);
+    }     
+      removeBook();
+
     }
 
     function handleManualEntryForm(){
@@ -115,7 +122,12 @@ export default function App() {
         return{...prevData, id:uuid()}        
       })
       addBook((prevList)=> [...prevList, manualBook]);
-      setManualEntryForm(false)
+      setManualEntryForm(false);
+      const handler = async () => {          
+        let res = await addBookToList(manualBook);
+        console.log("Added");       
+    }
+      handler();
     }
 
     
