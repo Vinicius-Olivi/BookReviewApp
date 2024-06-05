@@ -1,14 +1,43 @@
+import "./ReadingList.css";
+import { useState, useEffect } from 'react';
 function ReadingList(props){
+    
+    const [inputBox, setInputBox] = useState(false);
+    const [review, getReview] = useState("");
+    const [submittedReview, setReview] = useState("");
+    function handleChange(e){
+        getReview(e.target.value)
+    }
+    function handleSubmit(){
+        setReview(review);
+        setInputBox(false);
+        props.getReview(review);       
+    }
+    function handleDelete(){
+        setReview("")
+    }
+    function showInputBox(){
+        setInputBox(true)
+    }
+
+    function handleRemove(){
+        // console.log(props.id)
+        props.handleRemove(props.id);
+    }
     return(
-        <div>
-        <h1>My Reading List</h1>
-        <h2>____________________________________</h2>
-        <h2>____________________________________</h2>
-        <h3>{props[0]}</h3>
-        <h3>{props[1]}</h3>
-        <h3>{props[2]}</h3>
-        <h3>{props[3]}</h3>
+        <div className="ReadingList">      
+        <p>Title: {props.title}<button onClick={handleRemove}>Remove from List</button></p> 
+        <p>Author: {props.author}</p>
+        <p>First published: {props.year}</p>
+        <p>Pages:{props.pages}</p>
+
+        <button onClick={showInputBox}>Add/Edit Review</button>
+        {inputBox&&<div><textarea type="text" style={{width:"300px", height:"100px"}} onChange={handleChange} value={review}/>
+        <button onClick={handleSubmit}>Submit</button>
+        </div>}
         
+        {submittedReview&&<div><p className="review">My Review:  {submittedReview}</p><button onClick={handleDelete}>Delete Review</button></div>}
+        <h2>____________________________________</h2> 
         </div>
     )
 }

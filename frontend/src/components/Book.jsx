@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import {v4 as uuid} from "uuid";
+import {v4 as uuid} from "uuid";
 import "./Book.css";
 function Book(props) {
   
@@ -18,7 +18,7 @@ function Book(props) {
     }
     const data = await response.json();     
     let i=0; let arr=[];
-    while(i<5){
+    while(i<6){
         arr.push(data.docs[i]);
         i++;}
     setBook(arr);
@@ -38,12 +38,12 @@ fetchHandler();
         book.map((b)=>
         <div><h1>Book Title: {b.title}</h1>      
         {(b.cover_edition_key||b.edition_key)&&(!b.cover_edition_key?<img src={"https://covers.openlibrary.org/b/olid/"+b.edition_key[0]+".jpg"} />:<img src={"https://covers.openlibrary.org/b/olid/"+b.cover_edition_key+".jpg"} />)}
-        <button onClick={()=>handleClick([b.title, b.author_name[0], b.first_publish_year,b.number_of_pages_median])}>Add to reading List</button>
+        <button onClick={()=>handleClick({title: b.title, author: b.author_name[0], year: b.first_publish_year,pages: b.number_of_pages_median, id: uuid()})}>Add to reading List</button>
         <h2>Author: {b.author_name}</h2>
         <h2>First Published: {b.first_publish_year}</h2>
         <h2>Number of pages: {b.number_of_pages_median}</h2>
         <h2>Rating: {Math.round(b.ratings_average*10)/10}</h2>
-        {b.subject&&<p>Genre: {b.subject.map((s,index)=>{if(index>0&&index<5)return<>{s}</>})}</p>}
+        {/* {b.subject&&<p>Genre: {b.subject.map((s,index)=>{if(index>0&&index<5)return<>{s}</>})}</p>} */}
         </div>)}       
       </div>    
           
