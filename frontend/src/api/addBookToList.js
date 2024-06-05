@@ -5,8 +5,8 @@ export const addBookToList = async (book) => {
         id:book.id,
         title: book.title,
         author: book.author,
-        releaseDate: book.year,
-        numberOfPages: book.pages,
+        year: book.year,
+        pages: book.pages,
         review:""
 
       }

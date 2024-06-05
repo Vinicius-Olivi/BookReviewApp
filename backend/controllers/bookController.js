@@ -21,7 +21,7 @@ const getBook = async (req, res) => {
 
 const createBook = async (req, res) => {
   // get the text from the req.body
-  const { id, title, author, releaseDate, numberOfPages, reviews } = req.body;
+  const { id, title, author, year, pages, reviews } = req.body;
 
   // create new todo object with model
   const bookObj = new Book({
@@ -29,8 +29,8 @@ const createBook = async (req, res) => {
     id:id,
     title: title,
     author: author,
-    releaseDate: releaseDate,
-    numberOfPages: numberOfPages,
+    year: year,
+    pages: pages,
     review: reviews,
   });
   // await for it to be saved

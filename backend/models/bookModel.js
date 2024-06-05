@@ -13,11 +13,11 @@ const bookSchema = new Schema({
     type: String,
     // required: true,
   },
-  releaseDate: {
+  year: {
     type: String,
     // required: true,
   },
-  numberOfPages: {
+  pages: {
     type: Number,
     // required: true,
   },

@@ -27,15 +27,14 @@ export default function App() {
     id:"",    
   })
 
-//   useEffect(() => {
-//     const fetchBooks = async () => {
-//         let data = await getBooks()
-//         // setTodos(data.todos)
-//         console.log(data.books);
-//         addBook(data.books)
-//     }
-//     fetchBooks()
-// }, [])
+  useEffect(() => {
+    const fetchBooks = async () => {
+        let data = await getBooks();
+        console.log(data.books);
+        addBook(data.books)
+    }
+    fetchBooks()
+}, [])
  
 
     function handleSubmit(event){
