@@ -21,15 +21,17 @@ const getBook = async (req, res) => {
 
 const createBook = async (req, res) => {
   // get the text from the req.body
-  const { title, author, releaseDate, numberOfPages, reviews } = req.body;
+  const { id, title, author, releaseDate, numberOfPages, reviews } = req.body;
 
   // create new todo object with model
   const bookObj = new Book({
+
+    id:id,
     title: title,
     author: author,
     releaseDate: releaseDate,
     numberOfPages: numberOfPages,
-    reviews: reviews,
+    review: reviews,
   });
   // await for it to be saved
   const newBook = await bookObj.save();
@@ -42,11 +44,11 @@ const editBook = async (req, res) => {
   // get id from ':id' param from the route
   const { id } = req.params;
   //get updated todo data from the request body
-  const book = await Book.findByIdAndUpdate(is, { text: req.body.text });
+  const book = await Book.findOneAndUpdate({id:id}, {$set:{ review: req.body.review }});
   res.status(200).json(book);
   // use mongoose model method findByIdAndUpdate
 };
-
+// req.body.review
 const deleteBook = async (req, res) => {
   // get id from ':id' param from the route
   const { id } = req.params;

@@ -4,6 +4,8 @@ import "./App.css";
 import Author from "./components/Author";
 import Book from "./components/Book";
 import ReadingList from "./components/ReadingList";
+import { addBookToList } from "./api/addBookToList";
+import { updateBook } from "./api/updateBook";
 
 
 export default function App() {
@@ -15,7 +17,9 @@ export default function App() {
   const [userTitle, fetchTitle]=useState("");
 
   const [book, addBook]= useState([]);
-  const [review, setReview] = useState("")
+  const [review, setReview] = useState("ABS");
+  const [myReview, setMyReview] = useState("myReview");
+
 
   const [manualEntryForm, setManualEntryForm] = useState(false);
   const [manualBook, setManualBook] = useState({
@@ -23,7 +27,7 @@ export default function App() {
     author:"",
     year:"",
     pages:"",
-    id:""
+    id:"",    
   })
  
 
@@ -54,10 +58,30 @@ export default function App() {
 
     function handleAdd(data){
       addBook((prevList)=> [...prevList, data]);
+      const handler = async () => {          
+        let res = await addBookToList(data);
+        console.log("Added");       
+    }
+      handler();
     }
 
-    function getReview(data){
+    function getReview(data, id){
       setReview(data);
+      const bookReview = book.map(addReview);
+      function addReview(b){
+          if(b.id==id){          
+            const updateBookReview = async () => {        
+              let obj = {
+                  id: id,
+                  review: data
+              }
+              let result = await updateBook(obj);
+          }     
+          updateBookReview(); 
+          return {...b, [myReview]:data}
+        }else{return b}
+      }
+      addBook(bookReview);
     }
 
     function handleRemove(id){      
@@ -87,6 +111,8 @@ export default function App() {
       addBook((prevList)=> [...prevList, manualBook]);
       setManualEntryForm(false)
     }
+
+    
 
   
   return (
@@ -123,7 +149,7 @@ export default function App() {
           {manualBook.title&&manualBook.author&&<input type="submit" onClick={addManualBook} />}
           </form>}
           <h2>____________________________________</h2>
-        {book.map((b)=><ReadingList key={b.id} title={b.title} author={b.author} year ={b.year} pages={b.pages} id={b.id} getReview={getReview} handleRemove={handleRemove}/>)}
+        {book.map((b)=><ReadingList key={b.id} title={b.title} author={b.author} year ={b.year} pages={b.pages} id={b.id} getReview={getReview} handleRemove={handleRemove} myReview={review} />)}
         
       </div>       
     </div>
