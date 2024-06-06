@@ -11,7 +11,7 @@ function ReadingList(props){
     function handleSubmit(){
         setReview(review);
         setInputBox(false);
-        props.getReview(review);       
+        props.getReview(review, props.id);       
     }
     function handleDelete(){
         setReview("")
@@ -21,7 +21,6 @@ function ReadingList(props){
     }
 
     function handleRemove(){
-        // console.log(props.id)
         props.handleRemove(props.id);
     }
     return(

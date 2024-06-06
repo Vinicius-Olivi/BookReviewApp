@@ -17,19 +17,39 @@ const getBook = async (req, res) => {
   const book = await Book.findById(id);
   // response (res) with .json with the todo found
   res.status(200).json(book);
+  return book;
+};
+
+const findBooksByAuthor = async (req, res) => {
+  try {
+    // Find books by author's name
+    const { authorName } = req.params;
+    const books = await Book.find({ author: authorName });
+    if (books.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "Book not found for this author" });
+    }
+    res.status(200).json({ books: books });
+    return books; // Returns an array of books
+  } catch (error) {
+    console.error("Error finding books by author:", error);
+    res.status(500).json({ message: "Internal error: " + error.message });
+  }
 };
 
 const createBook = async (req, res) => {
   // get the text from the req.body
-  const { title, author, releaseDate, numberOfPages, reviews } = req.body;
+  const { id, title, author, releaseDate, numberOfPages, reviews } = req.body;
 
   // create new todo object with model
   const bookObj = new Book({
+    id: id,
     title: title,
     author: author,
     releaseDate: releaseDate,
     numberOfPages: numberOfPages,
-    reviews: reviews,
+    review: reviews,
   });
   // await for it to be saved
   const newBook = await bookObj.save();
@@ -65,7 +85,7 @@ const editBook = async (req, res) => {
     console.error("Error updating book", error);
   }
 };
-
+// req.body.review
 const deleteBook = async (req, res) => {
   // get id from ':id' param from the route
   const { id } = req.params;
@@ -84,4 +104,5 @@ module.exports = {
   createBook,
   editBook,
   deleteBook,
+  findBooksByAuthor,
 };
