@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import {v4 as uuid} from "uuid";
 import "./Author.css";
+
 function Author(props) {
   
   const [book, setBook] = useState([]);  
-  let ifValid=false;
+  const [ifValid, setValid] =useState(false);
+  const [errorColor, setErrorColor] = useState("#132743");
 
   function handleClick(data){
     props.handleAdd(data);
@@ -14,9 +16,12 @@ function Author(props) {
     try{
     const response = await fetch(`https://openlibrary.org/search.json?author=${props.author}&limit=10&fields=key,title,author_name,ratings_average,cover_edition_key,edition_key,first_publish_year,number_of_pages_median,subject&sort=rating`);
     if(!response.ok){
-      throw new Error(response.statusText);
+        throw new Error(response.statusText);
     }
-    const data = await response.json();     
+  
+    const data = await response.json();  
+    if(data.docs.length>0){setValid(true)}else{setErrorColor("#ffb5b5")}
+    
     let i=0; let arr=[];
     while(i<6){
         arr.push(data.docs[i])
@@ -33,7 +38,7 @@ fetchHandler();
   }, [])
 
   return (    
-    <div className='authorContainer'>
+    ifValid?(<div className='authorContainer'>
 
       <div>
         {
@@ -49,7 +54,7 @@ fetchHandler();
         </div>)}
       </div>    
           
-    </div>
+    </div>):(<h2 style={{color:errorColor}}>Sorry, could not find this author. Enter a valid Author Name.</h2>)
 )
 }
 

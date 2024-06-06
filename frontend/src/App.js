@@ -121,6 +121,7 @@ export default function App() {
       setManualBook((prevData)=>{        
         return{...prevData, id:uuid()}        
       })
+      console.log(manualBook)
       addBook((prevList)=> [...prevList, manualBook]);
       setManualEntryForm(false);
       const handler = async () => {          

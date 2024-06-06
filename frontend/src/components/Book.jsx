@@ -4,7 +4,8 @@ import "./Book.css";
 function Book(props) {
   
   const [book, setBook] = useState([]); 
-  let ifValid=false;
+  const [ifValid, setValid] =useState(false);
+  const [errorColor, setErrorColor] = useState("#132743");
 
   function handleClick(data){
     props.handleAdd(data);
@@ -17,6 +18,9 @@ function Book(props) {
       throw new Error(response.statusText);    
     }
     const data = await response.json();     
+     
+    if(data.docs.length>0){setValid(true)}else{setErrorColor("#ffb5b5")}
+    
     let i=0; let arr=[];
     while(i<6){
         arr.push(data.docs[i]);
@@ -31,7 +35,7 @@ fetchHandler();
   }, [])
 
   return (    
-    <div className='bookContainer'>
+    ifValid?(<div className='bookContainer'>
 
       <div>
         {
@@ -47,7 +51,7 @@ fetchHandler();
         </div>)}       
       </div>    
           
-    </div>
+    </div>):(<h2 style={{color:errorColor}}>Sorry, could not find this book. Enter a valid Book Name.</h2>)
 )
 }
 
