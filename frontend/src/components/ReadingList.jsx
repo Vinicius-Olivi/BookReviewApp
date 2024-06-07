@@ -29,6 +29,8 @@ function ReadingList(props){
         <p>Author: {props.author}</p>
         <p>First published: {props.year}</p>
         <p>Pages:{props.pages}</p>
+        {props.myReview&&<p>My Review:{props.myReview}</p>}
+
 
         <button onClick={showInputBox}>Add/Edit Review</button>
         {inputBox&&<div><textarea type="text" style={{width:"300px", height:"100px"}} onChange={handleChange} value={review}/>

@@ -41,7 +41,7 @@ fetchHandler();
         {
         book.map((b)=>
         <div><h1>Book Title: {b.title}</h1>      
-        {(b.cover_edition_key||b.edition_key)&&(!b.cover_edition_key?<img src={"https://covers.openlibrary.org/b/olid/"+b.edition_key[0]+".jpg"} />:<img src={"https://covers.openlibrary.org/b/olid/"+b.cover_edition_key+".jpg"} />)}
+        {(b.cover_edition_key||b.edition_key)&&(!b.cover_edition_key?<img src={"https://covers.openlibrary.org/b/olid/"+b.edition_key[0]+"-M.jpg"} />:<img src={"https://covers.openlibrary.org/b/olid/"+b.cover_edition_key+"-M.jpg"} />)}
         <button onClick={()=>handleClick({title: b.title, author: b.author_name[0], year: b.first_publish_year,pages: b.number_of_pages_median, id: uuid()})}>Add to reading List</button>
         <h2>Author: {b.author_name}</h2>
         <h2>First Published: {b.first_publish_year}</h2>

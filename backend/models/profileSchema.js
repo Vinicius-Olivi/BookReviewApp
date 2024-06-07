@@ -1,4 +1,4 @@
-/* const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const profilesSchema = new Schema({
@@ -14,16 +14,16 @@ const profilesSchema = new Schema({
     type: String,
     required: true,
   },
-  Location: {
-    type: String,
-    required: true,
-  },
-  dob: [
-    {
-      type: Date,
-    },
-  ],
+  // Location: {
+  //   type: String,
+  //   required: true,
+  // },
+  // dob: [
+  //   {
+  //     type: Date,
+  //   },
+  // ],
 });
 
 module.exports = mongoose.model("profile", profilesSchema);
- */
+
