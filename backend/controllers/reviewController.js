@@ -1,4 +1,4 @@
-const Profile = require("../models/profileModel");
+// const Profile = require("../models/profileModel");
 const Book = require("../models/bookModel");
 const Review = require("../models/reviewModel");
 
@@ -16,7 +16,7 @@ const createReview = async (req, res) => {
   const { username, bookId, reviewSentence, reviewNumber, date } = req.body;
 
   try {
-    const profile = await Profile.findOne({ username: username });
+    // const profile = await Profile.findOne({ username: username });
     const book = await Book.findById(bookId);
 
     if (!book) {
@@ -26,7 +26,7 @@ const createReview = async (req, res) => {
 
     const newReview = new Review({
       reviewSentence: reviewSentence,
-      profile: profile._id,
+      // profile: profile._id,
       book: book._id,
       reviewNumber: reviewNumber,
       date: date,
@@ -34,8 +34,8 @@ const createReview = async (req, res) => {
     await newReview.save();
 
     // Update profile's reviews array
-    profile.reviews.push(newReview._id);
-    await profile.save();
+    /*     profile.reviews.push(newReview._id);
+    await profile.save(); */
 
     // Update book's reviews array
     book.reviews.push(newReview._id);

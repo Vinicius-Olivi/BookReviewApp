@@ -16,7 +16,7 @@ const reviewsSchema = new Schema({
     required: true,
   },
   // Reference to the profile making this review
-  profile: { type: Schema.Types.ObjectId, ref: "Profile", required: true },
+  // profile: { type: Schema.Types.ObjectId, ref: "Profile", required: true },
   // Reference to the book being reviewed
   book: { type: mongoose.Schema.Types.ObjectId, ref: "Book", required: true },
 });

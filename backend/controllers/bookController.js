@@ -40,15 +40,15 @@ const findBooksByAuthor = async (req, res) => {
 
 const createBook = async (req, res) => {
   // get the text from the req.body
-  const { id, title, author, releaseDate, numberOfPages, reviews } = req.body;
+  const { id, title, author, year, pages, reviews } = req.body;
 
   // create new todo object with model
   const bookObj = new Book({
     id: id,
     title: title,
     author: author,
-    releaseDate: releaseDate,
-    numberOfPages: numberOfPages,
+    year: year,
+    pages: pages,
     review: reviews,
   });
   // await for it to be saved
@@ -85,12 +85,10 @@ const editBook = async (req, res) => {
     console.error("Error updating book", error);
   }
 };
-// req.body.review
-const deleteBook = async (req, res) => {
-  // get id from ':id' param from the route
-  const { id } = req.params;
 
-  const book = await Book.findByIdAndDelete(id);
+const deleteBook = async (req, res) => {
+  const { id } = req.params;
+  const book = await Book.findOneAndDelete({ id: id });
   res.status(200);
   res.json({
     message: `${book.title} deleted successfully`,
