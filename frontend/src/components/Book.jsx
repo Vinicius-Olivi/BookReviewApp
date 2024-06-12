@@ -3,7 +3,8 @@ import { v4 as uuid } from "uuid";
 import "./Book.css";
 function Book(props) {
   const [book, setBook] = useState([]);
-  let ifValid = false;
+  const [ifValid, setValid] = useState(false);
+  const [errorColor, setErrorColor] = useState("#132743");
 
   function handleClick(data) {
     props.handleAdd(data);
@@ -18,6 +19,13 @@ function Book(props) {
         throw new Error(response.statusText);
       }
       const data = await response.json();
+
+      if (data.docs.length > 0) {
+        setValid(true);
+      } else {
+        setErrorColor("#ffb5b5");
+      }
+
       let i = 0;
       let arr = [];
       while (i < 6) {
@@ -33,7 +41,7 @@ function Book(props) {
     fetchHandler();
   }, []);
 
-  return (
+  return ifValid ? (
     <div className="bookContainer">
       <div>
         {book.map((b) => (
@@ -45,7 +53,7 @@ function Book(props) {
                   src={
                     "https://covers.openlibrary.org/b/olid/" +
                     b.edition_key[0] +
-                    ".jpg"
+                    "-M.jpg"
                   }
                 />
               ) : (
@@ -53,7 +61,7 @@ function Book(props) {
                   src={
                     "https://covers.openlibrary.org/b/olid/" +
                     b.cover_edition_key +
-                    ".jpg"
+                    "-M.jpg"
                   }
                 />
               ))}
@@ -79,6 +87,10 @@ function Book(props) {
         ))}
       </div>
     </div>
+  ) : (
+    <h2 style={{ color: errorColor }}>
+      Sorry, could not find this book. Enter a valid Book Name.
+    </h2>
   );
 }
 

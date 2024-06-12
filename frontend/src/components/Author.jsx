@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import "./Author.css";
+
 function Author(props) {
   const [book, setBook] = useState([]);
-  let ifValid = false;
+  const [ifValid, setValid] = useState(false);
+  const [errorColor, setErrorColor] = useState("#132743");
 
   function handleClick(data) {
     props.handleAdd(data);
@@ -17,7 +19,14 @@ function Author(props) {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
+
       const data = await response.json();
+      if (data.docs.length > 0) {
+        setValid(true);
+      } else {
+        setErrorColor("#ffb5b5");
+      }
+
       let i = 0;
       let arr = [];
       while (i < 6) {
@@ -34,7 +43,7 @@ function Author(props) {
     fetchHandler();
   }, []);
 
-  return (
+  return ifValid ? (
     <div className="authorContainer">
       <div>
         {book.map((b) => (
@@ -45,7 +54,7 @@ function Author(props) {
                 src={
                   "https://covers.openlibrary.org/b/olid/" +
                   b.edition_key[0] +
-                  ".jpg"
+                  "-M.jpg"
                 }
               />
             ) : (
@@ -53,7 +62,7 @@ function Author(props) {
                 src={
                   "https://covers.openlibrary.org/b/olid/" +
                   b.cover_edition_key +
-                  ".jpg"
+                  "-M.jpg"
                 }
               />
             )}
@@ -79,6 +88,10 @@ function Author(props) {
         ))}
       </div>
     </div>
+  ) : (
+    <h2 style={{ color: errorColor }}>
+      Sorry, could not find this author. Enter a valid Author Name.
+    </h2>
   );
 }
 
