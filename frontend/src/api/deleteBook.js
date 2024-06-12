@@ -8,6 +8,7 @@ export const deleteBook = async (obj) => {
       "Content-Type": "application/json",
     },
   });
+
   // convert to json
   const data = await response.json();
   // return json
