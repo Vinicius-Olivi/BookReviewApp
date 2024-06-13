@@ -2,7 +2,7 @@ const Book = require("../models/bookModel");
 
 const getBooks = async (req, res) => {
   // find all items from a mongoose Model method
-  const books = await Book.find({});
+  const books = await Book.find({}).populate("reviews");
   // respond with an object that has a message and the items from the DB
   res.json({
     message: "all books",
@@ -14,7 +14,7 @@ const getBook = async (req, res) => {
   // get id from ':id' param from the route (the :id in the route path)
   const { id } = req.params;
   // find todo with Model.findById()
-  const book = await Book.findById(id);
+  const book = await Book.findById(id).populate("reviews");
   // response (res) with .json with the todo found
   res.status(200).json(book);
   return book;

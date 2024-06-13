@@ -1,17 +1,34 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const reviewSchema = new Schema({
+  content: {
+    type: String,
+    required: true,
+  },
+  book: {
+    type: Schema.Types.ObjectId,
+    ref: "Book",
+    required: true,
+  },
+});
+
+module.exports = mongoose.model("Review", reviewSchema);
+
+/* const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
 const reviewsSchema = new Schema({
   reviewNumber: {
     type: Number,
-    required: true,
+    // required: true,
   },
   date: {
     type: Date,
     default: Date.now,
-    required: true,
+    // required: true,
   },
-  reviewSentence: {
+  myReview: {
     type: String,
     required: true,
   },
@@ -21,7 +38,7 @@ const reviewsSchema = new Schema({
   book: { type: mongoose.Schema.Types.ObjectId, ref: "Book", required: true },
 });
 
-module.exports = mongoose.model("Review", reviewsSchema);
+module.exports = mongoose.model("Review", reviewsSchema); */
 
 /* const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
