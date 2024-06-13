@@ -1,0 +1,27 @@
+.authorContainer div {
+  margin-left: 2%;
+  display: grid;
+  grid-template-columns: repeat(3, 42%);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.authorContainer {
+  width: 70%;
+}
+.authorContainer div div {
+  display: flex;
+  flex-direction: column;
+}
+.authorContainer div div h1 {
+  font-size: 20px;
+  padding: 0%;
+  margin: 0%;
+}
+
+.authorContainer div div h2 {
+  font-size: 20px;
+  padding: 0%;
+  margin: 0%;
+  font-weight: 100;
+}

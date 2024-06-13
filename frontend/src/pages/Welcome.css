@@ -1,0 +1,10 @@
+.welcome {
+  color: #ffb5b5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.welcome div {
+  text-align: center;
+}
