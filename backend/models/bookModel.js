@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
+<<<<<<< Updated upstream
   name: {
+=======
+  title: {
+>>>>>>> Stashed changes
     type: String,
     required: true,
   },
@@ -10,6 +14,7 @@ const bookSchema = new Schema({
     type: String,
     required: true,
   },
+<<<<<<< Updated upstream
   releaseDate: {
     type: Date,
     required: true,
@@ -18,6 +23,15 @@ const bookSchema = new Schema({
     type: Number,
     required: true,
   },
+=======
+  year: {
+    type: Date,
+  },
+  numOfPages: {
+    type: Number,
+  },
+
+>>>>>>> Stashed changes
   reviews: [
     {
       type: Schema.Types.ObjectId,
