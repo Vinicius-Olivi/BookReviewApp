@@ -13,7 +13,7 @@ const API_URL = `http://localhost:4000`;
 // }
 
 export const getBooks = async () => {
-  const response = await fetch(`${API_URL}/api/books`, {
+  const response = await fetch(`${API_URL}/api/books/`, {
     // method type?
     method: "GET",
     // content type?

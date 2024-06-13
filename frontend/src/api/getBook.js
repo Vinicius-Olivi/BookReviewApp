@@ -1,6 +1,6 @@
 const API_URL = `http://localhost:4000`;
 
-export const getTodo = async (id) => {
+export const getBook = async (id) => {
   const response = await fetch(`${API_URL}/api/book/${id}`, {
     // method type?
     method: "GET",
