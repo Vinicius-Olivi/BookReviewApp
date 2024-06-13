@@ -192,9 +192,9 @@ export default function SearchAndBookList() {
         {userBook && <Author author={userBook} handleAdd={handleAdd} />}
         {userTitle && <Book book={userTitle} handleAdd={handleAdd} />}
       </div>
-      <div className="readingList">
+      <div className="readingList" style={{ padding: "1.5rem" }}>
         <h1>My Reading List</h1>
-        <h2>____________________________________</h2>
+        <h2>__________________________________</h2>
 
         <button onClick={handleManualEntryForm}>
           Add a book to the list manually
@@ -232,7 +232,7 @@ export default function SearchAndBookList() {
             )}
           </form>
         )}
-        <h2>____________________________________</h2>
+        <h2>__________________________________</h2>
         {books.map((b) => (
           <ReadingList
             key={b.id}

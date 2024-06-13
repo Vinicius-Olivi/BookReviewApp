@@ -61,11 +61,15 @@ const ReadingList = ({
         style={{
           display: "flex",
           justifyContent: "center",
+          alignItems: "flex-end",
+          gap: "10px",
         }}
         onSubmit={handleReviewSubmit}
       >
         <TextareaAutosize
-          style={{ height: "30%", width: "20rem" }}
+          style={{ width: "20rem" }}
+          minRows={4}
+          maxRows={8}
           value={newReview}
           onChange={(e) => setNewReview(e.target.value)}
           placeholder="Write a review"
@@ -78,18 +82,50 @@ const ReadingList = ({
           placeholder="Write a review"
           required
         /> */}
+        <button
+          style={{
+            cursor: "pointer",
+            minHeight: "2rem",
+            maxHeight: "2rem",
+            marginTop: "10px",
+            borderRadius: "6px",
+            boxShadow: "#132743",
+            cursor: "pointer",
+          }}
+          type="submit"
+        >
+          Add Review
+        </button>
       </form>
-      <button style={{ cursor: "pointer" }} type="submit">
-        Add Review
-      </button>
-      <div>
+      <div style={{}}>
         <h4>Reviews:</h4>
         {reviews &&
           reviews.map((review) => (
             <div key={review._id}>
-              <p>{review.content}</p>
-              <button onClick={() => handleReviewDelete(review._id)}>
-                Delete the review
+              <p
+                style={{
+                  boxSizing: "content-box",
+                  padding: "20px",
+                  margin: "2px",
+                  border: "1px solid #132743",
+                  color: "#132743",
+                  textAlign: "left",
+                  borderRadius: "6px",
+                  boxShadow: "#132743 2px 2px ",
+                }}
+              >
+                {review.content}
+              </p>
+              <button
+                style={{
+                  marginTop: "10px",
+                  borderRadius: "6px",
+                  boxShadow: "#132743",
+                  cursor: "pointer",
+                }}
+                onClick={() => handleReviewDelete(review._id)}
+              >
+                Delete review
               </button>
             </div>
           ))}

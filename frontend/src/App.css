@@ -1,10 +1,16 @@
+/* *{
+  overflow-x: hidden;
+}
+ */
 .App{
   background-color: #132743;
   color: #ffb5b5;
   text-align: center;  
   display: flex;
   justify-content:space-evenly;
-  
+
+
+ 
   overflow: auto;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
