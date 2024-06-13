@@ -1,14 +1,20 @@
 require("dotenv").config();
-
 const express = require("express");
-const bookRoutes = require("./routes/bookRoutes.js");
 const mongoose = require("mongoose");
 const cors = require("cors");
+
+//Routes
+const bookRoute = require("./routes/bookRoute.js");
+const profileRoute = require("./routes/profileRoute.js");
+const reviewRoute = require("./routes/reviewRoute.js");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use("/books", bookRoutes);
+
+app.use("/api", bookRoute);
+app.use("/api", profileRoute);
+app.use("/api", reviewRoute);
 
 mongoose
   .connect(process.env.MONGODB_URL)
