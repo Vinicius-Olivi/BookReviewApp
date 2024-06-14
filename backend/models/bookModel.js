@@ -10,17 +10,16 @@ const bookSchema = new Schema({
     type: String,
     required: true,
   },
-  releaseDate: {
-    type: Date,
-    required: true,
-  },
-  numberOfPages: {
+  year: {
     type: Number,
-    required: true,
+  },
+  pages: {
+    type: Number,
   },
   reviews: [
     {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Review",
     },
   ],
 });
